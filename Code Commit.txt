@@ -1,0 +1,10 @@
+        CODE COMMIT
+.Create repo (gve name(ccrepo) & description(my first code commit repo))- Create repo
+.Add file-Create file - file1.txt (Content: This is my first file in the  repo, Author: Sai, Emai: sai4cs@gmail.com, & commitmsg: Adding  my first  file) commit changes.
+.Go to branches-Create new branch (mybranch & from master) & verify the content
+.Append content in new branch & commit
+.Create pull request (dest: master, source: mybranch), compare (give  title) & create.
+.Merge - (verify delete source branch after merge) & Merge pull request (verify the content in file which is in master branch)
+.Verify all options
+.Settings-Notifications
+.Delete repo

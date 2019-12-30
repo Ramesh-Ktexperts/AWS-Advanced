@@ -1,0 +1,83 @@
+	Cross Account Access
+1. Take 2 accounts (Sai & Priya)
+
+2. Be in Sai's account
+- Create group "Developers" and give "AdminAccess" permission.
+- Create user "Chiru" and add him to "Developers" group. (Download CSV)
+
+3. Be in Priyas's account
+- Create two buckets (priya-bucket-janjnjanjvfn & fara-bucket-ngjdgangjkdnjk) with default permissions.
+
+- Create an IAM policy, give any name (read-write-app-bucket) and attach below policy, validate and create policy
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "s3:ListAllMyBuckets",
+      "Resource": "arn:aws:s3:::*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetBucketLocation"
+       ],
+      "Resource": "arn:aws:s3:::priya-bucket-janjnjanjvfn"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": "arn:aws:s3:::priya-bucket-janjnjanjvfn/*"
+    }
+  ]
+}
+
+- Create a new Role-Role for CrossAccountAccess-give Sai account's ID-attach "read-write-app-bucket" policy-name(MyDevelopersAccess)
+
+4. Be in Sai's account
+- Attach an Inline policy to "Developers" group and give name to that policy (allow-s3-in-priys-account)
+
+{
+  "Version": "2012-10-17",
+  "Statement": {
+    "Effect": "Allow",
+    "Action": "sts:AssumeRole",
+    "Resource": "arn:aws:iam::<Priys's account ID>:role/MyDevelopersAccess"
+  }
+}
+
+5. Login as chiru
+-switch role-give priya's account ID-give role(MyDevelopersAccess)-choose colour-switch role.
+
+6. Now, chiru is in Priya's account
+-Can upload file in priya-bucket
+-Cann't upload file in fara-bucket
+
+-switch back to chiru's account(Back to Chiru)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

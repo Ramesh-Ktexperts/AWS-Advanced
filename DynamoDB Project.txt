@@ -1,0 +1,19 @@
+
+Go to North virginia
+Take t2 medium EC2 & test.php in LB
+Take default vpc
+------------------------------------------------------------
+#!/bin/bash
+sudo su
+yum update -y
+yum install httpd php git -y
+service httpd start
+chkconfig httpd on
+cd /var/www/html
+echo "Hello Everyone!!" > test.php
+git clone https://github.com/SaiDevOpsFaculty/vendor.git
+git clone https://github.com/SaiDevOpsFaculty/saidynamodb.git
+---------------------------------------------------------------------
+http://www.saicloudexpert.com/saidynamodb/dynamo/createtables.php
+http://www.saicloudexpert.com/saidynamodb/dynamo/uploaddata.php
+---------------------------------------------------------------------

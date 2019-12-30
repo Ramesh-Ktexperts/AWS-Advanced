@@ -1,0 +1,51 @@
+   VPC Flowlogs-CloudWatch
+
+Go to CloudWatch-logs-Actions-Create log group-flowlogs-Create log group
+-----------------------------------
+Create EC2 role(only EC2)-Go to that role-Permissions-Add inline policy-json
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogGroups",
+        "logs:DescribeLogStreams"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}  
+
+Review policy
+Name: FlowLogstoLogGroup - create policy
+--------------------------------------------------
+Trust relationship - Edit trust relationship
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "vpc-flow-logs.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+} 
+
+Update trust relationship
+---------------------------------------
+Go to VPC-FlowLogs-Create flow log
+Fliter-All
+Destination-Send to CloudWatch Logs
+Destination log group - flowlogs
+IAM ROle - our created role - Create- Close
+------------------------------
+It takes minimum 10 min to store log files in CloudWatch

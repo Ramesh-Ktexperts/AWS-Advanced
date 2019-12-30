@@ -1,0 +1,24 @@
+Install AWS CLI in wndows machine
+----------------------------------
+Create Root access keys
+Go to command prompt and type "aws configure"
+Give Access keys, Secret Keys, Region name(region :ap-south-1) & Test format
+aws s3 ls
+aws s3 mb s3://nklanklfnsdlnvlanvlnf
+echo "Hi everyone" > hello.txt
+aws s3 cp hello.txt s3://nklanklfnsdlnvlanvlnf
+aws s3 ls s3://nklanklfnsdlnvlanvlnf
+---------------------------------------------------------------
+	Create IAM User & Group
+aws ec2 describe-regions --output text
+aws iam create-group --group-name EC2-Group
+aws iam create-user --user-name Raj
+aws iam add-user-to-group --user-name Raj --group-name EC2-Group
+aws iam get-group --group-name EC2-Group
+-----------------------------------------------------------------
+	Launch Windows Instance
+aws ec2 create-key-pair --key-name mykey --query 'KeyMaterial' --output text > mykey.pem
+aws ec2 create-security-group --group-name saigroup --description "created-sg"
+aws ec2 authorize-security-group-ingress --group-name saigroup --protocol tcp --port 3389 --cidr 0.0.0.0/0
+aws ec2 run-instances --image-id ami-0ce933e2ae91880d3 --count 1 --instance-type t2.micro --key-name mykey --security-groups saigroup
+aws ec2 describe-instances

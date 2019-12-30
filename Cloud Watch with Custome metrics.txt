@@ -1,0 +1,56 @@
+	Default metrics
+1. CPU
+2. Network
+3. Dick (IO)
+4. Status checks
+
+	Custome metrics
+1. RAM utilization
+----------------------
+	LAB
+1. Create EC2-Cloud watch full access role
+2. Launch EC2-attach role-Paste bootstrap script-open ssh & http ports
+
+#!/bin/bash
+yum update -y
+sudo yum install -y perl-Switch perl-DateTime perl-Sys-Syslog perl-LWP-Protocol-https perl-Digest-SHA.x86_64
+cd /home/ec2-user/
+curl https://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-1.2.2.zip -O
+unzip CloudWatchMonitoringScripts-1.2.2.zip
+rm -rf CloudWatchMonitoringScripts-1.2.2.zip
+
+3. Go inside EC2 and run "sudo su". Do "ls". Can see "aws-scripts-mon" dir
+4. Go inside "aws-scripts-mon" and do "ls". Can see many directories and files.
+------------------------
+5. Go to Cloud watch and create dash board and verify default EC2 metrics.
+
+6. Run the below command to verify role is working or not (inside "aws-scripts-mon" directory)
+/home/ec2-user/aws-scripts-mon/mon-put-instance-data.pl --mem-util --verify --verbose
+
+7. Run below command to sent mem-util mem-used mem-avail to cloud watch only once (inside "aws-scripts-mon" directory)
+/home/ec2-user/aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --mem-avail
+
+After 5 min, go to Cloud watch and hit "Browse metrics" and verify.
+
+Go to Cloud watch and create dash board and verify. Can see "Linux System" under custom metrics. Inside that, can see all 3 (mem-util mem-used mem-avail)
+
+8. Put below command in "crontab" file to sent mem-util mem-used mem-avail to cloud watch after every 1 min
+vi /etc/crontab
+*/1 * * * * root /home/ec2-user/aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --mem-avail
+Esc:wq!(enter)
+Wait for 15 to 20 min. Can see data points in cloud watch dashboard.
+-----------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+

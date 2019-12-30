@@ -1,0 +1,33 @@
+    VPC Peering
+
+VPC (NVirginia-VPC) 10.0.0.0/26
+10.0.0.32/28 (PublicSN)(public server(open ssh))
+Assign PublicIP
+Pub subnet-RT(use existing)-IG(create)(to get internet)
+--------------------------------------------------------
+VPC (Oregaon-VPC) 10.0.1.0/26
+10.0.1.48/28 (PrivateSN)(private server(open ssh to public server))
+----------------------------------------------------------
+Oregon-vpc-peering connection-create peering connection
+Tag: My-Peering
+Requester :select from dropdown
+myaccount
+another region - n-virginia
+accepter : n-virginia vpc ID
+create peering connection-ok
+---------------------------------------------------------
+N-virginia-vpc-peering connection
+select request-actions-accept-ok
+--------------------------------------------------------
+NVirginia-Routetable-take RT attached to publicSN
+10.0.1.0/26 - peering connection
+
+Oragon-Routetable-take RT attached to privateSN
+10.0.0.0/26 - peering connection
+------------------------------------------------------
+Open privateEC2 SG to PublicEC2 IP
+
+Try to jump into privateEC2 from PublicEC2
+-------------------------------------------
+Delete EC2s, VPC peering & VPCs
+

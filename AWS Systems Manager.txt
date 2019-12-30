@@ -1,0 +1,19 @@
+	Systems Manager(SSM)
+1. SSM is a management tool which gives you visibility and control over your AWS infrastructure.
+2. Integrates with CloudWatch allowing you view your dashboards, view operational data & detect problems.
+3. Includes "Run" Command which automates operational tasks across resources. It allows you to run pre-defined commands on one or more EC2 instances with out needing login to your machines.
+eg: Installing packages, stop, start, restart, resize and terminate instances.
+4. Organize your inventory, grouping resources together by application or environment
+
+	LAB
+1. Create an IAM Role (EC2-EC2roleforSSM role). Give any name (EC2-SSM-Role)
+2. Launch 3 EC2, attach above role to only 2, give tag (Application - Retail), open SSH & HTTP.
+
+3. Go to systems manager
+4. Under resources group, you can search for required resources based on tag.
+5. Can save "Query as a group" and give any name. Later on we can apply any thing to this group.
+6. Verify CLoud train in "Built-in-sights"
+7. Go to Automation-Execute automation-Stop Inatances-Input parameters-Select some instances-Execute automation.(verify)
+8. Go to "Run command", Give Document name prefix : Equal : AWS-RunShellScript, Select AWS-RunShellScript
+Give code to install web package, Select instances-run-verify in output
+9. Terminate EC2 of same resource group
